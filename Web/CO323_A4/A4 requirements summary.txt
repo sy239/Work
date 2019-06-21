@@ -1,0 +1,35 @@
+PHP scripts that access a MySQL database and display the results of SQL queries on the web
+5 tables in relational database: Club, Member, Team, TeamPlayer, Fixture
+
+Task 1
+======
+-task1.php
+-Display table with forenames, surnames, dates of birth of all members in club 'C02'
+-Ordered by gender then surname with same gender
+
+Task 2
+======
+-task2.php
+-Unordered list of club names with total number of teams in each club, excluding <2 teams
+
+Task 3
+======
+-task3.php
+-Get details of each team
+-Form with dropdown list input and submit button
+-List contains results retrieved from database
+-ID submitted via Get to task4.php
+
+Task 4
+======
+-task4.php
+-Accept ID from task3.php and display all matches played by team (use parameterised query)
+
+
+Task 5
+======
+-menu.php: links to each task (1-4)
+-loginform.html: login via POST to login.php
+-login.php: start session, otherwise redirect to loginform.html
+-logout.php: destroy session if logged in, otherwise redirect to loginform.html
+-modify task 1-4 to check session (if not logged in then redirect to loginform.html)

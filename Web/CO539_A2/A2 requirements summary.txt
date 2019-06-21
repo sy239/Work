@@ -1,0 +1,19 @@
+AJAX coursework
+Displays a list of businesses, their addresses, hygiene ratings, and customer ratings
+
+Task 1
+======
+-Display first page of results when page loads
+-Get number of pages and display page buttons
+-Page button empties results table and displays fetched data in table
+
+Task 2
+======
+-Add rating column with 'Get rating' button
+-'Get rating' button: displays customer rating in pop-up window
+
+Task 3
+======
+-Search functionality
+-4 default autocompletes
+-Add previous searches to autocomplete

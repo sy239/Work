@@ -1,0 +1,98 @@
+body {
+	font-family: "Courier New", Courier, monospace;
+	color: black;
+}
+#header {
+	position: relative;
+	min-height: 28px;
+	height: 4vh;
+	border-bottom: solid 1px black;
+}
+#headerContent {
+	position: absolute;
+	bottom: 0px;
+	left: 10px;
+	font-size: 20pt;
+}
+#side {
+	position: relative;
+	float: left;
+	min-width: 115px;
+	width: 9vw;
+	min-height: 150px;
+	margin-right: 10px;
+	border-right: black 1px solid;
+}
+#sideLinks {
+	font-size: 13pt;
+}
+#sideInfo {
+	float: right;
+	min-width: inherit;
+	width: inherit;
+	margin-right: 5px;
+	overflow-wrap: break-word;
+	font-size: 10pt;
+}
+ul {
+	padding-left: 20px;
+}
+#main {
+}
+#mainContent {
+	font-size: 12pt;
+	margin-top: 10px;
+	margin-left: 126px;
+}
+img {
+	width: 25%;
+	height: 25%;
+}
+table {
+	border-collapse: collapse;
+}
+table, th, td {
+	border: black 1px solid;
+}
+th {
+	background-color: #E0D0FF;
+}
+tr:nth-child(even) {
+	background-color: #FFF5FF;
+}
+tr:nth-child(odd) {
+	background-color: #FFF0FF;
+}
+td:nth-child(2) {
+	text-align: center;
+}
+#loginButton {
+	width: calc(100% - 20px);
+	height: 50px;
+	border: #DDDDFF 5px outset;
+	background-color: #D0D0F0;
+	margin-top: 10px;
+}
+#loginButton:hover {
+	border: #FFDDFF 5px outset;
+	background-color: #F0D0F0;
+}
+#loginButton:active {
+	border: #FFBBBB 5px inset;
+	background-color: #F0B0B0;
+}
+#loginButtonText {
+	line-height: 1;
+	margin-top: calc(50px / 4);
+	text-align: center;
+	font-size: 17pt;
+	font-weight: bold;
+	text-decoration: none;
+}
+#loginButtonText:active {
+	margin-top: calc(2px + 50px / 4);
+}
+#login {
+	color: black;
+	text-decoration: none;
+}

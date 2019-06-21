@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+	<title>Golden ratio</title>
+	<style>
+		div {
+			position: absolute;
+			background-image: url("https://www.cs.kent.ac.uk/people/staff/dao7/co583/grid.png");
+			border: black 2px solid;
+			text-align: center;
+		}
+		#full {
+			background-image: none;
+			border: none;
+		}
+		#div21 {
+			width: calc(20px * 21 - 2px);
+			height: calc(20px * 21 - 2px);
+			line-height: calc(20px * 21 - 2px);
+			font-size: 75pt;
+		}
+		#div13 {
+			left: calc(20px * 21);
+			width: calc(20px * 13 - 2px);
+			height: calc(20px * 13 - 2px);
+			line-height: calc(20px * 13 - 2px);
+			font-size: 50pt;
+		}
+		#div8 {
+			top: calc(20px * 13);
+			left: calc(20px * 26);
+			width: calc(20px * 8 - 2px);
+			height: calc(20px * 8 - 2px);
+			line-height: calc(20px * 8 - 2px);
+			font-size: 48pt;
+		}
+		#div5 {
+			top: calc(20px * 16);
+			left: calc(20px * 21);
+			width: calc(20px * 5 - 2px);
+			height: calc(20px * 5 - 2px);
+			line-height: calc(20px * 5 - 2px);
+			font-size: 33pt;
+		}
+		#div3 {
+			top: calc(20px * 13);
+			left: calc(20px * 21);
+			width: calc(20px * 3 - 2px);
+			height: calc(20px * 3 - 2px);
+			line-height: calc(20px * 3 - 2px);
+			font-size: 25pt;
+		}
+		#div2 {
+			top: calc(20px * 13);
+			left: calc(20px * 24);
+			width: calc(20px * 2 - 2px);
+			height: calc(20px * 2 - 2px);
+			line-height: calc(20px * 2 - 2px);
+			font-size: 18pt;
+		}
+		#div1r {
+			top: calc(20px * 15);
+			left: calc(20px * 24);
+			width: calc(20px * 1 - 2px);
+			height: calc(20px * 1 - 2px);
+			line-height: calc(20px * 1 - 2px);
+			font-size: 16pt;
+		}
+		#div1l {
+			top: calc(20px * 15);
+			left: calc(20px * 25);
+			width: calc(20px * 1 - 2px);
+			height: calc(20px * 1 - 2px);
+			line-height: calc(20px * 1 - 2px);
+			font-size: 16pt;
+		}
+	</style>
+</head>
+<body>
+	<!--
+		bg image is 20px x 20px with 2px border on the right and bottom
+	-->
+	<div id="full">
+		<div id="div21">21</div>
+		<div id="div13">13</div>
+		<div id="div8">8</div>
+		<div id="div5">5</div>
+		<div id="div3">3</div>
+		<div id="div2">2</div>
+		<div id="div1r">1</div>
+		<div id="div1l">1</div>
+	</div>
+</body>
+</html>

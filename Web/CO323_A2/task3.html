@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>A2Q3</title>
+	<style>
+		form > * {
+			margin-bottom: 5px;
+		}
+	 	div {
+	 		padding: 3px;
+	 		margin: 3px;
+	 		float: left;
+	 		border: black 1px solid;
+	 	}
+	</style>
+</head>
+<body>
+	<form id="userInput">
+		First name: <input type="text" name="info"/><br/>
+		Last name: <input type="text" name="info"/><br/>
+		Date of birth: <input type="date" name="info"/><br/>
+		Eye colour:
+		<select name="info">
+			<option value="Blue">Blue</option>
+			<option value="Brown">Brown</option>
+			<option value="Green">Green</option>
+			<option value="Grey">Grey</option>
+			<option value="Other">Other</option>
+		</select><br/>	
+		<input type="button" value="Display" onclick="displayInfo()"/>
+		<input type="reset" value="Reset"/>
+	</form>
+</body>
+<script>
+	//Get each input of the form as a list.
+	var userInfo = document.getElementsByName("info");
+	
+	function nameIsValid(name) {
+		//Disallow names beginning with a special character.
+		var invalid = /[\d`~!@#$%^&*()_+=\[{\]}\\|;:",<.>/?]/;
+		if(name == "" || invalid.test(name)) {
+			alert("Please enter a valid name.");
+			return false;
+		}
+		return true;
+	}
+
+	//Disallow a date that suggests someone has been alive for much longer than previously recorded or was born after the current date.
+	function dobIsValid(dob) {
+		var date = dob;
+		//Get today's date.
+		var minDate = new Date();
+		//An arbitrary date close to the date of birth of the oldest person recorded.
+		var maxDate = new Date('1890-01-01');
+		if(minDate > date && date > maxDate) {
+			return true;
+		}
+		alert("Please enter a valid date.");
+		return false;
+	}
+
+	function displayInfo() {
+		//Get the values of the input elements of the form.
+		var firstName = userInfo[0].value;
+		var lastName = userInfo[1].value;
+		var dob = new Date(userInfo[2].value);
+		var eyeColour = userInfo[3].value;
+		//Check to see if the values are valid.
+		if(nameIsValid(firstName) && nameIsValid(lastName) && dobIsValid(dob)) {
+			//Format the date so it looks neat for printing.
+			var formattedDob = (dob.getMonth()+1) + "/" + (dob.getDate()) + "/" + dob.getFullYear();
+			//Combine all the values and make them look neat for printing.
+			var compiledInfo = "First name: " + firstName + "<br/>Last name: " + lastName + "<br/>Date of birth (MM/DD/YYYY): " + formattedDob + "<br/>Eye colour: " + eyeColour;
+			//Create a div to store and display the values.
+			var entry = document.createElement("div");
+			entry.innerHTML = compiledInfo;
+			document.body.append(entry);
+			document.getElementById('userInput').reset();
+		}
+	}
+</script>
+</html>

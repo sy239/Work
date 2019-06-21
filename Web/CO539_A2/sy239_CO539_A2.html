@@ -1,0 +1,173 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .pageButton {
+            padding: 0px;
+            width: 36px;
+        }
+        table, th, td {
+            border: solid black 1px;
+            border-collapse: collapse;
+        }
+        table {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .ui-autocomplete {
+            width: 420px;
+            border: solid black 1px;
+            list-style: none;
+            padding-left: 0px;
+        }
+        .ui-state-active {
+            cursor: default;
+            background-color: pink;
+        }
+        .ui-helper-hidden-accessible {
+            display: none;
+        }
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(document).ready( function() {
+            //Show page 1 by default
+            $.get("https://www.cs.kent.ac.uk/people/staff/sm951/co539/assessment2/hygiene.php", { operation:"get", page:"1" }, function(data) {
+                showRows(data);
+            });
+            
+            //Get number of pages and display as buttons
+            $.get("https://www.cs.kent.ac.uk/people/staff/sm951/co539/assessment2/hygiene.php", { operation:"pages" }, function(data) {
+                for(var i=1; i<=data.pages; i++) {
+                    $("#pageButtons").append(
+                        "<button class='pageButton'>"+i+"</button>"
+                    );
+                }
+                //Set event for page buttons
+                $(".pageButton").click( setPBE);
+            });
+            
+            //Set event for search button
+            $("#searchButton").click( setSBE);
+
+        });
+        
+        //Event for page buttons
+        function setPBE() {
+            //Get results from page
+            $.get("https://www.cs.kent.ac.uk/people/staff/sm951/co539/assessment2/hygiene.php", { operation:"get", page:$(this).text() }, function(data) {
+                //Display page results
+                showRows(data);
+            });
+        }
+        
+        //Event for rating buttons
+        function setRBE() {
+            //Get the name and street from button's table row
+            var bName = $(this).parent().siblings(":first").text();
+            var bAddress = $(this).parent().siblings(":first").next().text().split(",", 1);
+            //Get businesses with matching name
+            $.get("https://www.cs.kent.ac.uk/people/staff/sm951/co539/assessment2/rating.php", { name:bName }, function(data) {
+                var found = false;
+                //Show pop-up of rating if the name and street match; otherwise not found
+                for(var i=0, l=data.length; i<l; i++) {
+                    var cAddress = data[i].vicinity.split(",", 1);
+                    if(bAddress.toString() == cAddress.toString()) {
+                        found = true;
+                        alert("Customer rating for "+data[i].name+" at "+data[i].vicinity+": ["+data[i].rating+"]");
+                        break;
+                    }
+                }
+                if(found == false) {
+                    alert("The customer rating for the business could not be found.");
+                }
+            });
+        }
+
+        //Event for search button
+        function setSBE() {
+            //Get businesses with names that match search term
+            $.get("https://www.cs.kent.ac.uk/people/staff/sm951/co539/assessment2/hygiene.php", { operation:"search", name:$("#searchInput").val().toString() }, function(data) {
+                //Display search results
+                showRows(data);
+                //Get current tag list
+                var newTags = $("#searchInput").autocomplete("option", "source");
+                //Add non-duplicate search result names to new tags list
+                data.forEach( function(searchEntry) {
+                    var duplicate = false;
+                    for(var i=0, l=newTags.length; i<l; i++) {
+                        if(searchEntry.name.toString() == newTags[i].toString()) {
+                            duplicate = true;
+                            break;
+                        }
+                    }
+                    if(!duplicate) {
+                        newTags.push(searchEntry.name);
+                    }
+                });
+                //Update autocomplete tags list
+                $("#searchInput").autocomplete("option", "source", newTags);
+            });
+        }
+        
+        //Show rows in table
+        function showRows(data) {
+            //Clear out table
+            $(".resultsRow").remove();
+            //Insert rows
+            data.forEach( function(entry) {
+                $("#resultsTable").append("<tr class='resultsRow'><td>"+entry.name+"</td><td>"+entry.addressLine+"</td><td>"+entry.hygieneRating+"</td><td><button class='ratingButton'>Get rating</button></td></tr>");
+            });
+            //Set event for rating buttons
+            $(".ratingButton").click(setRBE);
+        }
+        
+        //Set some default autocomplete tags
+        $(function() {
+            var tags = [
+                "Costa",
+                "McDonalds",
+                "Nandos",
+                "Town Kebab House"
+            ];
+            $("#searchInput").autocomplete({
+                source: tags,
+            });
+        });
+    </script>
+<body>
+    <h1>Food Hygiene Ratings</h1>
+    <p>
+        This page displays a list of businesses, their addresses, hygiene ratings, and customer ratings. Click on the 'Get rating' button for a business to see their customer rating if it is available.<br>The page buttons can be clicked to show the entries of the respective page.<br>Additionally, a business can be found by its name using the search function at the bottom. Insert a search term and press the 'Search' button.<br>
+        <!--
+            Some businesses with customer ratings:
+            [McDonalds @ Anthonys Way]
+            [Nandos @ Leviathan Way]
+            [Town Kebab House @ 22 High Street]
+            <br>
+            Some businesses with duplicates:
+            [Costa]
+            [McDonalds]
+            [Pizza Hut]
+        -->
+    </p>
+    
+
+    <div id="pageButtons">Pages: </div>
+
+    <table id="resultsTable">
+        <tr id="headings">
+            <th>Name</th><th>Address</th><th>Hygiene</th><th>Rating</th>
+        </tr>
+    </table>
+
+    <div class="ui-widget">
+        <label for="searchInput">Business name: </label>
+        <input id="searchInput">
+        <button id='searchButton'>Search</button>
+    </div>
+</body>
+</head>
+</html>

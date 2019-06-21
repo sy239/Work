@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+	<title>Index</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script>
+		var mainContentDiv;
+		var mainContentDivStyle;
+		var mainContentDivHeight
+		var sideDiv;
+		var sideDivStyle;
+		var headerDiv;
+		var headerDivStyle;
+		var totalHeight;
+		window.onload = function() {
+			mainContentDiv = document.getElementById("mainContent");
+			mainContentDivStyle = window.getComputedStyle(mainContentDiv);
+			mainContentDivHeight = parseInt(mainContentDivStyle.height, 10);
+			sideDiv = document.getElementById("side");
+			sideDivStyle = window.getComputedStyle(sideDiv);
+			headerDiv = document.getElementById("header");
+			headerDivStyle = window.getComputedStyle(headerDiv);
+			totalHeight = mainContentDivHeight + parseInt(headerDivStyle.height, 10);
+			if(totalHeight > window.innerHeight) {			
+				sideDiv.style.height = mainContentDivStyle.height;
+			}
+			else {
+				sideDiv.style.height = window.innerHeight - parseInt(headerDivStyle.height, 10) - 15 + "px";
+			}
+		}
+		function setSideHeight() {
+			if(totalHeight > window.innerHeight) {			
+				sideDiv.style.height = mainContentDivStyle.height;
+			}
+			else {
+				sideDiv.style.height = window.innerHeight - parseInt(headerDivStyle.height, 10) - 15 + "px";
+			}
+		}
+	</script>
+</head>
+<body onresize="setSideHeight()">
+	<!--
+		Scalable layout
+		Head: subject's name
+		Side: external and relative links; bullet-point list of core info
+		Main: image; table w CSS styling
+	-->
+	<div id="header">
+		<!--Subject's name-->
+		<div id="headerContent">
+		</div>
+	</div>
+	<div id="side">
+		<!--External links w absolute path, link back to login (index.html) w relative path, bullet-point list of core information-->
+		<div id="sideLinks">
+			<a id="login" href="profile.html">
+				<div id="loginButton">
+					<div id="loginButtonText">Login</div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div id="main">
+		<!--Include an image, info in a table (CSS styled)-->
+		<div id="mainContent">
+			You are currently logged out. Click on the Login button to log in to your account and view your profile.
+		</div>
+	</div>
+</body>
+</html>

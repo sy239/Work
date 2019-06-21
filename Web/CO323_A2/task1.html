@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>A2Q1</title>
+	<style>
+		#container div {
+			width: 40px;
+			height: 40px;
+			float: left;
+		}
+		input {
+			margin-top: 5px;
+			margin-bottom: 5px;
+		}
+	</style>
+	<script>
+		//Disallow non-digit characters and decimal points.
+		var invalid = /(\D|\.)/;
+		function isValid(inputValue) {
+			//Check if inputValue is not an integer or is less than 1.
+			if(invalid.test(inputValue) || parseInt(inputValue) < 1) {
+				alert("Please enter an integer above 0.");
+				return false;
+			}
+			return true;
+		}
+		function createBoxes() {
+			var inputValue = document.getElementById("userInput").value;
+			if(isValid(inputValue)) {
+				var quantity = parseInt(inputValue);
+				var container = document.getElementById("container");
+				//Clear the page by removing div children if they exist.
+				while(container.hasChildNodes()) {
+					container.removeChild(container.firstChild);
+				}
+				//Create and append the specified number of divs.
+				var marginSpacing = 5;
+				for(var i = 0; i < quantity; i++) {
+					var newDiv = document.createElement("div");
+					//Get the red, green, and blue values then combine them.
+					var red = Math.round(Math.random() * 255);
+					var green = Math.round(Math.random() * 255);
+					var blue = Math.round(Math.random() * 255);
+					var rgb = 'rgb(' + red + "," + green + "," + blue + ')';
+					newDiv.style.backgroundColor = rgb;
+					newDiv.style.marginLeft = marginSpacing + "px";
+					//Double the marginSpacing for each new div.
+					marginSpacing = marginSpacing * 2;
+					//Append the div.
+					container.appendChild(newDiv);
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<form>
+		How many boxes do you want to create? (Please enter an integer above 0.)<br/>
+		<input id="userInput" type="text" onChange="isValid(this.value)"/><br/>
+		<input type="button" value="Create" onCLick="createBoxes()"/>
+	</form>
+	<br/>
+	<div id="container"></div>
+</body>
+</html>

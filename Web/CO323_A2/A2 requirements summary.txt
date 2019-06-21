@@ -1,0 +1,11 @@
+Task 1
+======
+-Generate boxes with input
+-Random rgb background colour
+-margin-left of each box double previous box's margin (first box 5px)
+
+Task 3
+======
+-Input form of first name, last name, date of birth (date input), eye colour (dropdown)
+-Reset and Display buttons
+-Display: append input data and clear form

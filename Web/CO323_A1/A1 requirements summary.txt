@@ -1,0 +1,13 @@
+Simple scalable Facebook-like profile
+
+Task 1
+======
+-2 webpages with a shared external CSS stylesheet
+-Simple Facebook-like profile with 3-panel (header, sidebar, main) scalable (each component relative) layout similar to given image
+-Header: name
+-Sidebar: absolute/relative links; bullet-point list
+-Main: image; table
+
+Task 2
+======
+Recreate golden ratio image using HTML and CSS

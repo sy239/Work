@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+	<title>Profile</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script>
+		var mainContentDiv;
+		var mainContentDivStyle;
+		var mainContentDivHeight
+		var sideDiv;
+		var sideDivStyle;
+		var headerDiv;
+		var headerDivStyle;
+		var totalHeight;
+		window.onload = function() {
+			mainContentDiv = document.getElementById("mainContent");
+			mainContentDivStyle = window.getComputedStyle(mainContentDiv);
+			mainContentDivHeight = parseInt(mainContentDivStyle.height, 10);
+			sideDiv = document.getElementById("side");
+			sideDivStyle = window.getComputedStyle(sideDiv);
+			headerDiv = document.getElementById("header");
+			headerDivStyle = window.getComputedStyle(headerDiv);
+			totalHeight = mainContentDivHeight + parseInt(headerDivStyle.height, 10);
+			if(totalHeight > window.innerHeight) {			
+				sideDiv.style.height = mainContentDivStyle.height;
+			}
+			else {
+				sideDiv.style.height = window.innerHeight - parseInt(headerDivStyle.height, 10) - 15 + "px";
+			}
+		}
+		function setSideHeight() {
+			if(totalHeight > window.innerHeight) {			
+				sideDiv.style.height = mainContentDivStyle.height;
+			}
+			else {
+				sideDiv.style.height = window.innerHeight - parseInt(headerDivStyle.height, 10) - 15 + "px";
+			}
+		}
+	</script>
+</head>
+<body onresize="setSideHeight()">
+	<!--
+		Scalable layout
+		Head: subject's name
+		Side: external and relative links; bullet-point list of core info
+		Main: image; table w CSS styling
+	-->
+	<div id="header">
+		<!--Subject's name-->
+		<div id="headerContent">
+			Sena Steele
+		</div>
+	</div>
+	<div id="side">
+		<!--External links w absolute path, link back to login (index.html) w relative path, bullet-point list of core information-->
+		<div id="sideLinks">
+			<a href="index.html">Logout</a><br/>
+			<a href="goldenratio.html">Golden ratio</a><br/>
+			<a href="https://www.youtube.com/">YouTube</a><br/>
+			<a href="https://www.facebook.com/">Facebook</a><br/>
+			<a href="https://www.messenger.com/">Messenger</a><br/>
+		</div>
+		<div id="sideInfo">
+			<ul>
+				<li>Age: 19
+				<li>DoB: 29/10/1998</li>
+				<li>Sex: Female</li>
+			</ul>
+		</div>
+	</div>
+	<div id="main">
+		<!--Include an image, info in a table (CSS styled)-->
+		<div id="mainContent">
+			<img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Long-tailed_Tit_%28Aegithalos_caudatus%29_%285%29.jpg"/>
+			<table>
+				<caption>Favourite bands</caption>
+				<tr>
+					<th>Name</th>
+					<th>Rating</th>
+					<th>Favourite song</th>
+				</tr>
+				<tr>
+					<td>Death From Above 1979</td>
+					<td>7</td>
+					<td>Freeze Me</td>
+				</tr>
+				<tr>
+					<td>Starset</td>
+					<td>9</td>
+					<td>Satellite</td>
+				</tr>
+				<tr>
+					<td>Saint Motel</td>
+					<td>8</td>
+					<td>Move</td>
+				</tr>
+				<tr>
+					<td>Two Door Cinema Club</td>
+					<td>9</td>
+					<td>What You Know</td>
+				</tr>
+				<tr>
+					<td>We Are Scientists</td>
+					<td>10</td>
+					<td>Worth The Wait</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
